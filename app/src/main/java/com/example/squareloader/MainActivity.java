@@ -2,8 +2,8 @@ package com.example.squareloader;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import com.squareloader.SquareLoader;
+import com.squareloader.utils.Size;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,10 +12,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SquareLoader squareLoader = new SquareLoader(this);
+        SquareLoader squareLoader = findViewById(R.id.squareLoader);
+        squareLoader.setLoaderSize(Size.BIG);
         squareLoader.start();
 
-        ConstraintLayout bkg = findViewById(R.id.bkg);
-        bkg.addView(squareLoader);
     }
 }
