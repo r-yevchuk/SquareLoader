@@ -1,0 +1,3 @@
+include ':squareloader'
+include ':app'
+rootProject.name = "SquareLoaderExample"
