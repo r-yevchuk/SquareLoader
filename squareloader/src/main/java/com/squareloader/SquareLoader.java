@@ -3,7 +3,9 @@ package com.squareloader;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import androidx.annotation.Nullable;
 import com.squareloader.anim.Animation;
 import com.squareloader.anim.SpiralAnimation;
@@ -11,8 +13,8 @@ import com.squareloader.utils.Size;
 
 public class SquareLoader extends LinearLayout {
     private final Context context;
-    private Config config;
     private final ImageView[] ivs = new ImageView[9];
+    private Config config;
 
     public SquareLoader(Context context) {
         super(context);
@@ -33,19 +35,21 @@ public class SquareLoader extends LinearLayout {
     }
 
     private void init() {
-        config = new Config();
+        config = Config.getInstance();
         setLayoutParams(new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
         setOrientation(LinearLayout.VERTICAL);
-
     }
 
-    private void createImageViews(){
-        setPadding(0,0, config.squareMargin, config.squareMargin);
+    private void createImageViews() {
+        int margin = config.getSquareMargin();
+        int squareSize = config.getSquareSize();
+
+        setPadding(0, 0, margin, margin);
         RelativeLayout.LayoutParams rowParams = new RelativeLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, config.squareSize);
-        rowParams.setMargins(0, config.squareMargin, 0, 0);
+                ViewGroup.LayoutParams.MATCH_PARENT, squareSize);
+        rowParams.setMargins(0, margin, 0, 0);
         int tag = 0;
 
         for (int i = 0; i < 3; i++) {
@@ -55,10 +59,10 @@ public class SquareLoader extends LinearLayout {
             for (int j = 0; j < 3; j++) {
                 ivs[tag] = new ImageView(context);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                        config.squareSize, config.squareSize);
-                params.setMargins(config.squareMargin, 0, 0, 0);
+                        squareSize, squareSize);
+                params.setMargins(margin, 0, 0, 0);
                 ivs[tag].setLayoutParams(params);
-                ivs[tag].setBackgroundColor(Config.primaryColor);
+                ivs[tag].setBackgroundColor(config.getPrimaryColor());
                 ll.addView(ivs[tag]);
                 tag++;
             }
@@ -68,11 +72,19 @@ public class SquareLoader extends LinearLayout {
 
     public void start() {
         createImageViews();
-        Animation animation = new SpiralAnimation(ivs);
+        Animation animation = new SpiralAnimation(ivs, config);
         animation.start();
     }
 
-    public void setLoaderSize(Size size){
+    public void setLoaderSize(Size size) {
         config.setSize(size);
+    }
+
+    public void setPrimaryColor(String primaryColor) {
+        config.setPrimaryColor(primaryColor);
+    }
+
+    public void setSecondaryColor(String secondaryColor) {
+        config.setSecondaryColor(secondaryColor);
     }
 }
