@@ -7,14 +7,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import androidx.annotation.Nullable;
-import com.squareloader.anim.Animation;
-import com.squareloader.anim.SpiralAnimation;
+import com.squareloader.anim.*;
 import com.squareloader.utils.Size;
 
 public class SquareLoader extends LinearLayout {
     private final Context context;
     private final ImageView[] ivs = new ImageView[9];
     private Config config;
+    private AnimationType type;
 
     public SquareLoader(Context context) {
         super(context);
@@ -72,7 +72,18 @@ public class SquareLoader extends LinearLayout {
 
     public void start() {
         createImageViews();
-        Animation animation = new SpiralAnimation(ivs, config);
+
+        Animation animation;
+        switch (type) {
+            case LINEAR:
+                animation = new LinearAnimation(ivs, config);
+                break;
+            case ROUND:
+                animation = new RoundAnimation(ivs, config);
+                break;
+            default:
+                animation = new SpiralAnimation(ivs, config);
+        }
         animation.start();
     }
 
@@ -86,5 +97,9 @@ public class SquareLoader extends LinearLayout {
 
     public void setSecondaryColor(String secondaryColor) {
         config.setSecondaryColor(secondaryColor);
+    }
+
+    public void setAnimationType(AnimationType type) {
+        this.type = type;
     }
 }

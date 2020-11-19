@@ -2,10 +2,9 @@ package com.example.squareloader;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.squareloader.Config;
 import com.squareloader.SquareLoader;
+import com.squareloader.anim.AnimationType;
 import com.squareloader.utils.Size;
-import com.squareloader.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SquareLoader squareLoader = findViewById(R.id.squareLoader);
-        squareLoader.setLoaderSize(Size.NORMAL);
+        squareLoader.setLoaderSize(Size.SMALL);
+        squareLoader.setAnimationType(AnimationType.LINEAR);
         squareLoader.setPrimaryColor("#283747");
         squareLoader.setSecondaryColor("#85929E");
 

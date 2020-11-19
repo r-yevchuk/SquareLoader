@@ -9,16 +9,15 @@ import java.util.TimerTask;
 
 
 public class SpiralAnimation extends Animation {
-    private final int[] path = {0, 1, 2, 5, 8, 7, 6, 3, 4};
-    private final Config config;
+
     private int count = 0;
     private int pass = 1;
 
     private int currentColor;
 
     public SpiralAnimation(ImageView[] ivs, Config config) {
-        super(ivs);
-        this.config = config;
+        super(ivs, config);
+        path = new int[]{0, 1, 2, 5, 8, 7, 6, 3, 4};
     }
 
     @Override
