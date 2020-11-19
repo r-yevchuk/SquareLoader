@@ -25,6 +25,10 @@ Change color:
 squareLoader.setPrimaryColor("#283747");
 squareLoader.setSecondaryColor("#85929E");
 ```
+Animation type:
+```java
+squareLoader.setAnimationType(AnimationType.LINEAR); // SPIRAL, LINEAR, ROUND
+```
 Dependency
 ---
 Add it in your root build.gradle at the end of repositories:
@@ -39,6 +43,6 @@ allprojects {
 add dependency：
 ```java
 dependencies {
-    implementation 'com.github.r-yevchuk:squareloader:0.9'
+    implementation 'com.github.r-yevchuk:squareloader:0.9.1'
 }
 ```
